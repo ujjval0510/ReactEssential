@@ -1,58 +1,38 @@
 import './App.css';
+import { useState, useEffect } from 'react';
 
-// Header
-function Header(props) {
-  console.log(props.name);
+function App({ login }) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!login) return;
+    setLoading(true);
+    fetch(`https://api.github.com/users/${login}`)
+      .then((response) => response.json())
+      .then(setData)
+      .then(() => setLoading(false))
+      .catch(setError);
+
+  }, [login])
+
+  if (loading) return <h1>Loading....</h1>;
+
+  if (error) return <pre>{JSON.stringify(error, null, 2)}</pre>;
+
+
   return (
-    <header>
-      <h1>{props.name} Web Developer</h1>
-    </header>
+    data ?
+      <div>
+        <h1>API call from fetch using react : </h1>
+        <h2>Name : {data.name}</h2>
+        <h2>Location : {data.location}</h2>
+        <img alt={data.login} src={data.avatar_url} height={200}></img>
+      </div>
+      : null
   )
-}
 
-// Main function
-function Main(props) {
-  return (
-    <section>
-      <p>Services provided by us.</p>
-      <img
-        src="https://github.com/ujjvalVebuin.png"
-        height={300}
-        alt="ujjval github picture"></img>
-      <ul style={{ textAlign: "left" }}>
-        {props.items.map((item) =>
-          <li key={item.id}>{item.title}</li>)
-        }
-      </ul>
-    </section>
-  )
-}
-
-// Footer 
-function FooterArea(props) {
-  return (
-    <footer>
-      <p>Copyright @{props.year}</p>
-    </footer>
-  )
-}
-
-const listProvide = [
-  "Android development",
-  "iOS development",
-  "Web development"
-];
-
-const listObject = listProvide.map((item, i) => ({ id: i, title: item }));
-
-function App() {
-  return (
-    <div className="App">
-      <Header name="Shrimali" />
-      <Main items={listObject} />
-      <FooterArea year={new Date().getFullYear()} />
-    </div>
-  );
 }
 
 export default App;
