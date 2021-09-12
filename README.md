@@ -9,3 +9,7 @@ Steps :
    Check npm version : npm -v 
 3. Create React App : npx create-react-app your_app_name
 4. Happy Coding ☺️
+
+======Basic React ========
+- Understanding of the React Component / conditional rendering views
+- Understanding of Hooks (useState / useEffect)

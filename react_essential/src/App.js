@@ -1,57 +1,35 @@
 import './App.css';
-
-// Header
-function Header(props) {
-  console.log(props.name);
-  return (
-    <header>
-      <h1>{props.name} Web Developer</h1>
-    </header>
-  )
-}
-
-// Main function
-function Main(props) {
-  return (
-    <section>
-      <p>Services provided by us.</p>
-      <img
-        src="https://github.com/ujjvalVebuin.png"
-        height={300}
-        alt="ujjval github picture"></img>
-      <ul style={{ textAlign: "left" }}>
-        {props.items.map((item) =>
-          <li key={item.id}>{item.title}</li>)
-        }
-      </ul>
-    </section>
-  )
-}
-
-// Footer 
-function FooterArea(props) {
-  return (
-    <footer>
-      <p>Copyright @{props.year}</p>
-    </footer>
-  )
-}
-
-const listProvide = [
-  "Android development",
-  "iOS development",
-  "Web development"
-];
-
-const listObject = listProvide.map((item, i) => ({ id: i, title: item }));
+import { useState, useEffect } from 'react';
 
 function App() {
+  // useState store local value of variable and if it change
+  // then re-render view
+  const [emotions, setEmotions] = useState("happy");
+  const [secondary, setSecondary] = useState("tired");
+  /**
+   * if calls when function render first time
+   * if call every time when emotions state value changed.
+   */
+  useEffect(() => {
+    console.log("Use Effect 1" + emotions)
+  }, [emotions]);
+
+  /**this useEffect watch the state value 
+   * (secondary) if it's change then it calls automatically
+   * and print console log
+   */
+  useEffect(() => {
+    console.log("Use Effect 2 " + secondary)
+  }, [secondary]);
+
   return (
-    <div className="App">
-      <Header name="Shrimali" />
-      <Main items={listObject} />
-      <FooterArea year={new Date().getFullYear()} />
-    </div>
+    <>
+      <h1>Hello, I am {emotions}</h1>
+      <button onClick={() => setEmotions("happy")}>Make Happy</button>
+      <button onClick={() => setSecondary("crabby")}>Make Crabby</button>
+      <button onClick={() => setEmotions("frustrated")}>Frustrate</button>
+      <button onClick={() => setEmotions("sad")}>Sad</button>
+    </>
   );
 }
 
