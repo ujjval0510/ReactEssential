@@ -23,3 +23,9 @@ Steps :
 - Create a function for test 
 - Write a test cases for that function using expected output.
 - Run test cases using command : npm test
+
+7. React router
+- npm install react-router@next react-router-dom@next
+- npm install history
+- Create a different different compnents.
+- Map them in App.js file using "import { BrowserRouter as Router } from 'react-router-dom'"
