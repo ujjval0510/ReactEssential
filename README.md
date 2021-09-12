@@ -13,3 +13,7 @@ Steps :
 ======Basic React ========
 - Understanding of the React Component / conditional rendering views
 - Understanding of Hooks (useState / useEffect)
+ useEffect : The `useEffect` Hook is useful to perform additional work behind the scenes, without affecting the appearance of the webpage.
+- Basic of Reducers function : 
+  useReducer : it takes the current state and it returns a new state, then we will use this function to update the state.
+   
